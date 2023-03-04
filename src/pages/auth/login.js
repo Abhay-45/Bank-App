@@ -71,7 +71,7 @@ const Page = () => {
     <>
       <Head>
         <title>
-          Login | Devias Kit
+          Login | Sainsburry Bank
         </title>
       </Head>
       <Box

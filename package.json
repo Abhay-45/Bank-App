@@ -1,9 +1,8 @@
 {
-  "name": "material-kit-react",
+  "name": "bank-customer-app",
   "version": "3.0.0",
-  "author": "Devias",
+  "author": "Bank Pirates",
   "licence": "MIT",
-  "homepage": "https://devias.io",
   "private": false,
   "scripts": {
     "dev": "next",

@@ -8,7 +8,7 @@ const Page = () => (
   <>
     <Head>
       <title>
-        Account | Devias Kit
+        Account | Sainsburry Bank
       </title>
     </Head>
     <Box
