@@ -80,9 +80,9 @@ export const AuthProvider = (props) => {
     if (isAuthenticated) {
       const user = {
         id: "5e86809283e28b96d2d38537",
-        avatar: "/assets/avatars/avatar-anika-visser.png",
-        name: "Anika Visser",
-        email: "anika.visser@devias.io",
+        avatar: "https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg",
+        name: "Demo User",
+        email: "Dummy@example.com",
       };
 
       dispatch({
@@ -113,7 +113,7 @@ export const AuthProvider = (props) => {
 
     const user = {
       id: "5e86809283e28b96d2d38537",
-      avatar: "/assets/avatars/avatar-anika-visser.png",
+      avatar: "https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg",
       name: "Anika Visser",
       email: "anika.visser@devias.io",
     };
@@ -137,7 +137,7 @@ export const AuthProvider = (props) => {
 
     const user = {
       id: "5e86809283e28b96d2d38537",
-      avatar: "/assets/avatars/avatar-anika-visser.png",
+      avatar: "https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg",
       name: "Anika Visser",
       email: "anika.visser@devias.io",
     };
