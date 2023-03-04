@@ -63,21 +63,7 @@ const useChartOptions = (labels) => {
 };
 
 const iconMap = {
-  Desktop: (
-    <SvgIcon>
-      <ComputerDesktopIcon />
-    </SvgIcon>
-  ),
-  Tablet: (
-    <SvgIcon>
-      <DeviceTabletIcon />
-    </SvgIcon>
-  ),
-  Phone: (
-    <SvgIcon>
-      <PhoneIcon />
-    </SvgIcon>
-  )
+  //Removed the Icons. TODO: Replace Stuff with insights
 };
 
 export const OverviewTraffic = (props) => {
@@ -86,7 +72,7 @@ export const OverviewTraffic = (props) => {
 
   return (
     <Card sx={sx}>
-      <CardHeader title="Traffic Source" />
+      <CardHeader title="Spendings" />
       <CardContent>
         <Chart
           height={300}
