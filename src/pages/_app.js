@@ -17,6 +17,7 @@ const SplashScreen = () => null;
 const App = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
+
   useNProgress();
 
   const getLayout = Component.getLayout ?? ((page) => page);
