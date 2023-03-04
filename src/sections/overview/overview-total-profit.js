@@ -19,11 +19,12 @@ export const OverviewTotalProfit = (props) => {
               color="text.secondary"
               variant="overline"
             >
-              Total Profit
+              Missed Payments
             </Typography>
             <Typography variant="h4">
               {value}
             </Typography>
+            
           </Stack>
           <Avatar
             sx={{
