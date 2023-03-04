@@ -1,6 +1,6 @@
-import { format } from 'date-fns';
-import PropTypes from 'prop-types';
-import ArrowRightIcon from '@heroicons/react/24/solid/ArrowRightIcon';
+import { format } from "date-fns";
+import PropTypes from "prop-types";
+import ArrowRightIcon from "@heroicons/react/24/solid/ArrowRightIcon";
 import {
   Box,
   Button,
@@ -13,10 +13,20 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableRow
-} from '@mui/material';
-import { Scrollbar } from 'src/components/scrollbar';
-import { SeverityPill } from 'src/components/severity-pill';
+  TableRow,
+} from "@mui/material";
+import { Scrollbar } from "src/components/scrollbar";
+import { SeverityPill } from "src/components/severity-pill";
+import { useContext, useEffect, useState } from "react";
+import { CustomerContext } from "src/contexts/customer-context";
+import { getCustomerPayments } from "src/services/APIService";
+import { resolve } from "path";
+
+// const statusMap = {
+//   pending: "UPCOMING",
+//   delivered: "ONTIME",
+//   refunded: "MISSED",
+// };
 
 const statusMap = {
   pending: 'warning',
@@ -27,49 +37,53 @@ const statusMap = {
 export const OverviewLatestOrders = (props) => {
   const { orders = [], sx } = props;
 
+  const { authData } = useContext(CustomerContext);
+
+  const [payments, setPayments] = useState([]);
+
+  function getPaymentType(type) {
+    if(type === "UPCOMING") return "warning"
+    if(type === "ONTIME") return "success"
+    if(type === "MISSED") return "error"
+  }
+
+  useEffect(() => {
+    getCustomerPayments(authData.customerId)
+      .then((res) => {
+        console.log("These are the payments", res);
+        setPayments(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [authData]);
+
+  if (payments === []) return <p>Payments</p>;
+
   return (
     <Card sx={sx}>
-      <CardHeader title="Latest Orders" />
+      <CardHeader title="Your Payments" />
       <Scrollbar sx={{ flexGrow: 1 }}>
         <Box sx={{ minWidth: 800 }}>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>
-                  Order
-                </TableCell>
-                <TableCell>
-                  Customer
-                </TableCell>
-                <TableCell sortDirection="desc">
-                  Date
-                </TableCell>
-                <TableCell>
-                  Status
-                </TableCell>
+                <TableCell>Type</TableCell>
+                <TableCell>Payment Date</TableCell>
+                <TableCell sortDirection="desc">Payment Due Date</TableCell>
+                <TableCell>Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map((order) => {
-                const createdAt = format(order.createdAt, 'dd/MM/yyyy');
-
+              {payments?.customer_payments?.map((payment) => {
                 return (
-                  <TableRow
-                    hover
-                    key={order.id}
-                  >
+                  <TableRow hover key={payment.id}>
+                    <TableCell>{payment.type}</TableCell>
+                    <TableCell>{payment.payment_date}</TableCell>
+                    <TableCell>{payment.payment_due}</TableCell>
                     <TableCell>
-                      {order.ref}
-                    </TableCell>
-                    <TableCell>
-                      {order.customer.name}
-                    </TableCell>
-                    <TableCell>
-                      {createdAt}
-                    </TableCell>
-                    <TableCell>
-                      <SeverityPill color={statusMap[order.status]}>
-                        {order.status}
+                      <SeverityPill color={getPaymentType(payment.type_of_payment)}>
+                        {payment.type_of_payment}
                       </SeverityPill>
                     </TableCell>
                   </TableRow>
@@ -80,25 +94,12 @@ export const OverviewLatestOrders = (props) => {
         </Box>
       </Scrollbar>
       <Divider />
-      <CardActions sx={{ justifyContent: 'flex-end' }}>
-        <Button
-          color="inherit"
-          endIcon={(
-            <SvgIcon fontSize="small">
-              <ArrowRightIcon />
-            </SvgIcon>
-          )}
-          size="small"
-          variant="text"
-        >
-          View all
-        </Button>
-      </CardActions>
+
     </Card>
   );
 };
 
 OverviewLatestOrders.prototype = {
   orders: PropTypes.array,
-  sx: PropTypes.object
+  sx: PropTypes.object,
 };

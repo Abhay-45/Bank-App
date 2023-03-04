@@ -22,9 +22,9 @@ export const CompanyCard = (props) => {
             pb: 3
           }}
         >
-          <Avatar
-            src={company.logo}
-            variant="square"
+          <img
+            src={company.image}
+            
           />
         </Box>
         <Typography
@@ -54,19 +54,15 @@ export const CompanyCard = (props) => {
           alignItems="center"
           direction="row"
           spacing={1}
+          style={{ fontSize: 20 }}
         >
-          <SvgIcon
-            color="action"
-            fontSize="small"
-          >
-            <ClockIcon />
-          </SvgIcon>
           <Typography
             color="text.secondary"
             display="inline"
-            variant="body2"
+            style={{ fontSize: 20 }}
+          
           >
-            Updated 2hr ago
+          Discount for our Tier Holders
           </Typography>
         </Stack>
         <Stack
@@ -78,15 +74,18 @@ export const CompanyCard = (props) => {
             color="action"
             fontSize="small"
           >
-            <ArrowDownOnSquareIcon />
+            {/* <ArrowDownOnSquareIcon /> */}
           </SvgIcon>
           <Typography
             color="text.secondary"
             display="inline"
-            variant="body2"
+            style={{ fontSize: 20 }}
+          
           >
-            {company.downloads} Downloads
+          {company?.discount_percentage}%
+
           </Typography>
+
         </Stack>
       </Stack>
     </Card>

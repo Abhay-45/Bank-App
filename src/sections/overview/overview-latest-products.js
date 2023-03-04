@@ -1,7 +1,7 @@
-import { formatDistanceToNow } from 'date-fns';
-import PropTypes from 'prop-types';
-import ArrowRightIcon from '@heroicons/react/24/solid/ArrowRightIcon';
-import EllipsisVerticalIcon from '@heroicons/react/24/solid/EllipsisVerticalIcon';
+import { formatDistanceToNow } from "date-fns";
+import PropTypes from "prop-types";
+import ArrowRightIcon from "@heroicons/react/24/solid/ArrowRightIcon";
+import EllipsisVerticalIcon from "@heroicons/react/24/solid/EllipsisVerticalIcon";
 import {
   Box,
   Button,
@@ -14,86 +14,80 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  SvgIcon
-} from '@mui/material';
+  SvgIcon,
+} from "@mui/material";
+import { getOffers } from "src/services/APIService";
+import { useEffect, useState } from "react";
 
 export const OverviewLatestProducts = (props) => {
   const { products = [], sx } = props;
 
+  const [offers, setOffers] = useState([]);
+
+
+  useEffect(() => {
+    getOffers()
+      .then((res) => {
+        console.log("These are the payments", res);
+        setOffers(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  if (offers === "NA") return <p>Payments</p>;
+
   return (
     <Card sx={sx}>
-      <CardHeader title="Latest Products" />
+      <CardHeader title="Latest Offers" />
       <List>
-        {products.map((product, index) => {
-          const hasDivider = index < products.length - 1;
-          const ago = formatDistanceToNow(product.updatedAt);
+        {offers?.loyality_offers?.map((offer, index) => {
+          const hasDivider = index < offer.length - 1;
+          // const ago = formatDistanceToNow(offer.updatedAt);
 
           return (
-            <ListItem
-              divider={hasDivider}
-              key={product.id}
-            >
+            <ListItem divider={hasDivider} key={offer.id}>
               <ListItemAvatar>
-                {
-                  product.image
-                    ? (
-                      <Box
-                        component="img"
-                        src={product.image}
-                        sx={{
-                          borderRadius: 1,
-                          height: 48,
-                          width: 48
-                        }}
-                      />
-                    )
-                    : (
-                      <Box
-                        sx={{
-                          borderRadius: 1,
-                          backgroundColor: 'neutral.200',
-                          height: 48,
-                          width: 48
-                        }}
-                      />
-                    )
-                }
+                {offer.image ? (
+                  <Box
+                    component="img"
+                    src={offer.image}
+                    sx={{
+                      borderRadius: 1,
+                      height: 48,
+                      width: 48,
+                    }}
+                  />
+                ) : (
+                  <Box
+                    sx={{
+                      borderRadius: 1,
+                      backgroundColor: "neutral.200",
+                      height: 48,
+                      width: 48,
+                    }}
+                  />
+                )}
               </ListItemAvatar>
               <ListItemText
-                primary={product.name}
-                primaryTypographyProps={{ variant: 'subtitle1' }}
-                secondary={`Updated ${ago} ago`}
-                secondaryTypographyProps={{ variant: 'body2' }}
+                primary={offer.title}
+                primaryTypographyProps={{ variant: "subtitle1" }}
+                // secondary={`Updated ${ago} ago`}
+                secondaryTypographyProps={{ variant: "body2" }}
               />
-              <IconButton edge="end">
-                <SvgIcon>
-                  <EllipsisVerticalIcon />
-                </SvgIcon>
-              </IconButton>
+
             </ListItem>
           );
         })}
       </List>
       <Divider />
-      <CardActions sx={{ justifyContent: 'flex-end' }}>
-        <Button
-          color="inherit"
-          endIcon={(
-            <SvgIcon fontSize="small">
-              <ArrowRightIcon />
-            </SvgIcon>
-          )}
-          size="small"
-          variant="text"
-        >
-          View all
-        </Button>
-      </CardActions>
+
     </Card>
   );
 };
 
 OverviewLatestProducts.propTypes = {
   products: PropTypes.array,
-  sx: PropTypes.object
+  sx: PropTypes.object,
 };

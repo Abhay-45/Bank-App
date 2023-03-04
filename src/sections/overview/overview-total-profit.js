@@ -19,7 +19,7 @@ export const OverviewTotalProfit = (props) => {
               color="text.secondary"
               variant="overline"
             >
-              Missed Payments
+              Credit Limit
             </Typography>
             <Typography variant="h4">
               {value}
