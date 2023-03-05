@@ -71,6 +71,7 @@ export const OverviewLatestOrders = (props) => {
                 <TableCell>Type</TableCell>
                 <TableCell>Payment Date</TableCell>
                 <TableCell sortDirection="desc">Payment Due Date</TableCell>
+                <TableCell>Amount</TableCell>
                 <TableCell>Status</TableCell>
               </TableRow>
             </TableHead>
@@ -81,6 +82,8 @@ export const OverviewLatestOrders = (props) => {
                     <TableCell>{payment.type}</TableCell>
                     <TableCell>{payment.payment_date}</TableCell>
                     <TableCell>{payment.payment_due}</TableCell>
+                    <TableCell>{payment.amount}</TableCell>
+                    
                     <TableCell>
                       <SeverityPill color={getPaymentType(payment.type_of_payment)}>
                         {payment.type_of_payment}
