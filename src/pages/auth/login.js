@@ -51,7 +51,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Login | Sainsburry Bank</title>
+        <title>Login | Sainsbury's Bank</title>
       </Head>
       <Box
         sx={{

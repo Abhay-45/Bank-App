@@ -71,7 +71,7 @@ export const OverviewLatestOrders = (props) => {
                 <TableCell>Type</TableCell>
                 <TableCell>Payment Date</TableCell>
                 <TableCell sortDirection="desc">Payment Due Date</TableCell>
-                <TableCell>Amount</TableCell>
+                <TableCell>Amount(£)</TableCell>
                 <TableCell>Status</TableCell>
               </TableRow>
             </TableHead>

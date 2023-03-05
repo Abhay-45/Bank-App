@@ -26,7 +26,7 @@ function Page() {
   return (
     <>
       <Head>
-        <title>Overview | Sainsburry Bank</title>
+        <title>Overview | Sainsbury's Bank</title>
       </Head>
       <Box
         component="main"

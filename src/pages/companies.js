@@ -91,7 +91,7 @@ function Page() {
   return (
     <>
       <Head>
-        <title>Companies | Sainsburry Bank</title>
+        <title>Companies | Sainsbury's Bank</title>
       </Head>
       <Box
         component="main"

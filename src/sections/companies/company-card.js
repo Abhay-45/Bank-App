@@ -19,7 +19,8 @@ export const CompanyCard = (props) => {
           sx={{
             display: 'flex',
             justifyContent: 'center',
-            pb: 3
+            pb: 3,
+            boxShadow: "md"
           }}
         >
           <img

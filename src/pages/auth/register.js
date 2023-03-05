@@ -48,7 +48,7 @@ const Page = () => {
     <>
       <Head>
         <title>
-          Register | Sainsburry Bank
+          Register | Sainsbury's Bank
         </title>
       </Head>
       <Box
