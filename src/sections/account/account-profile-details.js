@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useContext, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -10,20 +10,22 @@ import {
   TextField,
   Unstable_Grid2 as Grid
 } from '@mui/material';
+import { CustomerContext } from 'src/contexts/customer-context';
+import { getCustomerDetails } from 'src/services/APIService';
 
 const states = [
   {
     value: 'Scotland',
     label: 'Scotland'
   },
-  
+
 ];
 
 export const AccountProfileDetails = () => {
   const [values, setValues] = useState({
-    firstName: 'Demo',
-    lastName: 'User',
-    email: 'demo@example.com',
+    firstName: 'Aman',
+    lastName: 'Soomro',
+    email: 'aman@example.com',
     phone: '',
     state: 'Edinburgh',
     country: 'UK'
@@ -45,6 +47,25 @@ export const AccountProfileDetails = () => {
     },
     []
   );
+
+  const [customerDetails, setCustomerDetails] = useState([])
+
+  const { authData } = useContext(CustomerContext)
+
+  const userEmail = authData?.email
+
+  useEffect(() => {
+    if (authData && authData?.email) {
+      getCustomerDetails(authData?.email)
+        .then(response => {
+          setCustomerDetails(response.customers[0])
+          console.log("Respose", response)
+        }).catch(err => {
+          console.log(err)
+        })
+    }
+  }, [])
+
 
   return (
     <form
@@ -68,6 +89,7 @@ export const AccountProfileDetails = () => {
                 md={6}
               >
                 <TextField
+                  autoFocus
                   fullWidth
                   helperText="Please specify the first name"
                   label="First name"
@@ -82,6 +104,7 @@ export const AccountProfileDetails = () => {
                 md={6}
               >
                 <TextField
+                  autoFocus
                   fullWidth
                   label="Last name"
                   name="lastName"

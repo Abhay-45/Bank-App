@@ -23,8 +23,8 @@ export const CompanyCard = (props) => {
           }}
         >
           <img
+            height={"240px"}
             src={company.image}
-            
           />
         </Box>
         <Typography
